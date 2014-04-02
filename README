@@ -1,15 +1,15 @@
-This Repository is for Juniper Slax scripts.
+This is Juniper op script in Slax.
 
-To use the scripts you need to:
+To use the script you need to:
 
-1) put the script in the /var/db/scripts directory under op, commit or event directory.
+1) put the script in the /var/db/scripts/op directory.
 
 2) configure the juniper router/switch to point to the script:
 for example:
 system {
    scripts {
     	  op {
-        	file my-op-script.slax;
+        	file error.slax;
           }
     }
 }
@@ -20,4 +20,19 @@ you need to execute an op script as follows:
 
 router>op <script-name> <argument>
 
+This script can tell you which interfaces has errors on it. 
 
+For example:
+
+router> op error 
+Error on output errors:  xe-1/0/0 on carrier-transitions 1
+Error on output errors:  et-1/1/0 on carrier-transitions 1
+Error on output errors:  xe-1/2/0 on carrier-transitions 1
+Error on input errors:  xe-1/2/3 on input-errors 3
+Error on input errors:  xe-1/2/3 on framing-errors 3
+Error on output errors:  xe-2/0/0 on carrier-transitions 8
+Error on input errors:  xe-2/0/1 on input-errors 53
+Error on input errors:  xe-2/0/1 on framing-errors 53
+Error on input errors:  xe-2/0/3 on input-errors 751
+Error on input errors:  xe-2/0/3 on framing-errors 751
+Error on output errors:  et-11/0/0 on carrier-transitions 22
