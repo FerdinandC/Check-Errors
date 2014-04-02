@@ -1,0 +1,39 @@
+version 1.0;
+ 
+ns junos= "http://xml.juniper.net/junos/*/junos";
+ 
+ns xnm= "http://xml.juniper.net/xnm/1.1/xnm";
+ 
+ns jcs= "http://xml.juniper.net/junos/commit-scripts/1.0";
+ 
+import "../import/junos.xsl";
+ 
+ 
+ 
+match /
+{
+    <event-op-results> {
+ 
+        var $interface-info = <command> "show interfaces extensive ";
+        var $interface-result = jcs:invoke($interface-info);
+ 
+        for-each($interface-result/physical-interface)
+        {
+		var $interface-name = current()/name;
+                for-each(current()/input-error-list/*) {
+                if(current() != 0)
+                {
+                        <output>"Error on input errors:  " _ $interface-name _ " on " _ local-name(current()) _ " " _ current();
+                }
+              }
+	        for-each(current()/output-error-list/*) {
+		if(current() != 0)
+                {
+                        <output>"Error on output errors:  " _ $interface-name _ " on " _ local-name(current()) _ " " _ current();
+ 
+                }                       
+              }
+        }
+      }
+}
+ 
