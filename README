@@ -1,0 +1,23 @@
+This Repository is for Juniper Slax scripts.
+
+To use the scripts you need to:
+
+1) put the script in the /var/db/scripts directory under op, commit or event directory.
+
+2) configure the juniper router/switch to point to the script:
+for example:
+system {
+   scripts {
+    	  op {
+        	file my-op-script.slax;
+          }
+    }
+}
+
+USAGE
+
+you need to execute an op script as follows:
+
+router>op <script-name> <argument>
+
+
