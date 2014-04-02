@@ -18,9 +18,11 @@ USAGE
 
 you need to execute an op script as follows:
 
-router>op <script-name> <argument>
+router>op error
 
-This script can tell you which interfaces has errors on it. 
+It is hard to find out which interfaces has errors when you issue as 'show interface xxx extensive | grep errors'
+
+This script easily can tell you which interfaces has errors on it. 
 
 For example:
 
